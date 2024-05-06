@@ -1,0 +1,31 @@
+diff --git a/dist/vite/client.d.ts b/dist/vite/client.d.ts
+index 7d4b2c20a9fc97ad538d89c850d0517df41271a0..54f6a0f4383c78f4dd353ae7c4a28572148098e0 100644
+--- a/dist/vite/client.d.ts
++++ b/dist/vite/client.d.ts
+@@ -1,6 +1,7 @@
+ import { Plugin } from 'vite';
+ 
+ type Options = {
++    entry?: string;
+     jsxImportSource?: string;
+     assetsDir?: string;
+ };
+diff --git a/dist/vite/client.js b/dist/vite/client.js
+index 2beda22387a7506caafe9e4b961facc1af661b05..13935f18b3b72124d5227ae1c86f15fe113380e1 100644
+--- a/dist/vite/client.js
++++ b/dist/vite/client.js
+@@ -1,4 +1,5 @@
+ const defaultOptions = {
++  entry: "/app/client.ts",
+   jsxImportSource: "hono/jsx/dom",
+   assetsDir: "static"
+ };
+@@ -9,7 +10,7 @@ function client(options) {
+       return {
+         build: {
+           rollupOptions: {
+-            input: ["/app/client.ts"]
++            input: [options?.entry ?? defaultOptions.entry]
+           },
+           assetsDir: options?.assetsDir ?? defaultOptions.assetsDir,
+           manifest: true
